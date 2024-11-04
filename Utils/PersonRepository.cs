@@ -61,6 +61,26 @@ namespace mreyesS5B.Utils
             return new List<Persona>();
         }
 
+        public void EliminarRegistro(int id)
+        {
+            int result = 0;
+            try
+            {
+                Init();
+                if (id == 0)
+                {
+                    throw new Exception("Seleccione el registro a eliminar");
+                }
+                Persona person = new() { Id = id };
+                result = conn.Delete(person);
+                status = string.Format("Dato eliminado");
+            }
+            catch (Exception ex)
+            {
+                status = string.Format("error al eliminar: " + ex.Message);
+            }
+        }
+
         // Update Delete
     }
 }

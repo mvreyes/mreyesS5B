@@ -19,6 +19,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -46,21 +47,55 @@
                             Grid.Column="0">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid ColumnSpacing="20">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Id}"
-                                   Grid.Column="0">
+                            <CheckBox x:Name="chkSeleccion"
+                                      Grid.Column="0"
+                                      VerticalOptions="Center"
+                                      CheckedChanged="chkSeleccion_CheckedChanged"
+                                      Margin="0,5,0,5">
+                            </CheckBox>
+                            <Label x:Name="lblId"
+                                   Text="{Binding Id}"
+                                   Grid.Column="1"
+                                   Margin="0,5,0,5">
                             </Label>
-                            <Label Text="{Binding Name}"
-                                   Grid.Column="1">
+                            <Label x:Name="lblNombre"
+                                   Text="{Binding Name}"
+                                   Grid.Column="2"
+                                   Margin="0,5,0,5">
                             </Label>
+                            <Button x:Name="btnModificar"
+                                    Text="MODIFICAR"
+                                    Grid.Column="3"
+                                    Clicked="btnModificar_Clicked"
+                                    Margin="0,5,0,5"
+                                    BackgroundColor="Yellow"
+                                    IsVisible="{Binding Source={x:Reference chkSeleccion}, Path=IsChecked}">
+                            </Button>
+                            <Button x:Name="btnEliminar"
+                                    Text="ELIMINAR"
+                                    Grid.Column="4"
+                                    Clicked="btnEliminar_Clicked"
+                                    Margin="0,5,0,5"
+                                    BackgroundColor="Red"
+                                    IsVisible="{Binding Source={x:Reference chkSeleccion}, Path=IsChecked}">
+                            </Button>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Label x:Name="lblMensaje"
+                   TextColor="red"
+                   Grid.Row="5"
+                   Grid.Column="0">
+            </Label>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
