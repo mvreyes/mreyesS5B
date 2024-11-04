@@ -66,11 +66,13 @@
                                    Grid.Column="1"
                                    Margin="0,5,0,5">
                             </Label>
-                            <Label x:Name="lblNombre"
+                            <Entry x:Name="txtNombre"
                                    Text="{Binding Name}"
                                    Grid.Column="2"
-                                   Margin="0,5,0,5">
-                            </Label>
+                                   Margin="0,5,0,5"
+                                   TextChanged="txtNombre_TextChanged"
+                                   IsEnabled="{Binding Source={x:Reference chkSeleccion}, Path=IsChecked}">
+                            </Entry>
                             <Button x:Name="btnModificar"
                                     Text="MODIFICAR"
                                     Grid.Column="3"

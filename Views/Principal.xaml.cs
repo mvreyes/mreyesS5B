@@ -4,7 +4,8 @@ namespace mreyesS5B.Views;
 
 public partial class Principal : ContentPage
 {
-    private int idPersona; 
+    private int idPersona;
+    private string nombrePersona;
 	public Principal()
 	{
 		InitializeComponent();
@@ -35,13 +36,17 @@ public partial class Principal : ContentPage
             else
             {
                 idPersona = 0;
+                nombrePersona = "";
             }
         }
     }
 
     private void btnModificar_Clicked(object sender, EventArgs e)
     {
+        App.personRepo.ModificarRegistro(idPersona, nombrePersona);
+        lblMensaje.Text = App.personRepo.status;
 
+        btnMostrar_Clicked(sender, e);
     }
 
     private void btnEliminar_Clicked(object sender, EventArgs e)
@@ -50,5 +55,19 @@ public partial class Principal : ContentPage
         lblMensaje.Text = App.personRepo.status;
 
         btnMostrar_Clicked(sender, e);
+    }
+
+    private void txtNombre_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var valorTexto = sender as Entry;
+        if (valorTexto?.BindingContext is Persona persona)
+        {
+            nombrePersona = e.NewTextValue;
+            persona.Name = nombrePersona;
+        }
+        else
+        {
+            nombrePersona = "";
+        }
     }
 }

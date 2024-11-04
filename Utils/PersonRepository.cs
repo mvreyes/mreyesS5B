@@ -61,6 +61,46 @@ namespace mreyesS5B.Utils
             return new List<Persona>();
         }
 
+        public bool ModificarRegistro(int id, string nombre)
+        {
+            try
+            {
+                Init();
+                if (string.IsNullOrWhiteSpace(nombre))
+                {
+                    status = "El nombre es requerido";
+                    return false;
+                }
+
+                Persona personaExistente = conn.Find<Persona>(id);
+                if (personaExistente == null)
+                {
+                    status = "No se encontró un registro con el ID especificado.";
+                    return false;
+                }
+
+                personaExistente.Name = nombre;
+                int result = conn.Update(personaExistente);
+
+                if (result > 0)
+                {
+                    status = "Dato modificado correctamente";
+                    return true;
+                }
+                else
+                {
+                    status = "No se realizó ninguna modificación.";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                status = string.Format("error al modificar: " + ex.Message);
+                return false;
+            }
+        }
+
+
         public void EliminarRegistro(int id)
         {
             int result = 0;
